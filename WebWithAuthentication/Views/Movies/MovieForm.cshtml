@@ -1,0 +1,85 @@
+﻿@model WebWithAuthentication.ViewModels.MovieFormViewModel
+@{
+    ViewBag.Title = "MovieForm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>New</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true, "Please fix the following errors")
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Name)
+        @Html.TextBoxFor(m => m.Name, new { @class = "form-control", @placeholder = "Name", @id="name" })
+        @Html.ValidationMessageFor(m => m.Name)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.ReleaseDate)
+        @Html.TextBoxFor(m => m.ReleaseDate, "{0:dd MMM yyyy}", new { @class = "form-control", placeholder = "Release Date" })
+        @Html.ValidationMessageFor(m => m.ReleaseDate)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.GenreId)
+        @Html.DropDownListFor(m => m.GenreId, new SelectList(Model.Genres, "Id", "Name"), "Select Genre Type", new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.GenreId)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.NumberInStock)
+        @Html.TextBoxFor(m => m.NumberInStock, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.NumberInStock)
+    </div>
+
+    <div>
+        <input type="text" name="name" value="" id="data-name"/>
+    </div>
+    
+    @Html.HiddenFor(m => m.Id)
+    @Html.AntiForgeryToken()
+    <button type="submit" class="btn btn-primary" id="save">Save</button>
+
+}
+
+
+
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        $(document).ready(function () {
+            //This is to prevent any jQuery code from running before the document is finished loading (is ready).
+            $("#save").on("click",
+                function () {
+                    var movie = {
+                        "name": document.getElementById("name").value,
+                        "genreId": 4,
+                        "dateAdded": "2005-09-09T00:00:00",
+                        "releaseDate": "2018-05-10T00:00:00",
+                        "numberInStock": 4
+                    };
+
+                    console.log(movie);
+
+                    $.ajax({ //this is jQuery ajax
+                        url: "/api/movies",
+                        //url: A string containing the URL to which the request is sent.
+                        method: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        data: JSON.stringify(movie),
+
+                        success: function () { //callback function
+                            console.log("Success");
+//                            button.parents("tr").remove();
+                            //Remove row with delete button
+                        }
+                    });
+
+                });
+        });
+    </script>
+}
+
