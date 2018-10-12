@@ -247,6 +247,10 @@
     <Compile Include="Migrations\201810110944320_SeedUsers.Designer.cs">
       <DependentUpon>201810110944320_SeedUsers.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201810120324384_AddDrivingLicenseToUserTable.cs" />
+    <Compile Include="Migrations\201810120324384_AddDrivingLicenseToUserTable.Designer.cs">
+      <DependentUpon>201810120324384_AddDrivingLicenseToUserTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -256,6 +260,7 @@
     <Compile Include="Models\MembershipType.cs" />
     <Compile Include="Models\Min18YearsIfAMember.cs" />
     <Compile Include="Models\Movie.cs" />
+    <Compile Include="Models\RoleName.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\CustomerFormViewModel.cs" />
@@ -589,6 +594,9 @@
     <EmbeddedResource Include="Migrations\201810110944320_SeedUsers.resx">
       <DependentUpon>201810110944320_SeedUsers.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810120324384_AddDrivingLicenseToUserTable.resx">
+      <DependentUpon>201810120324384_AddDrivingLicenseToUserTable.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -608,7 +616,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>63004</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:63004/</IISUrl>
+          <IISUrl>https://localhost:44373/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>https://localhost:63004/</CustomServerUrl>

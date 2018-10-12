@@ -31,13 +31,14 @@ namespace WebWithAuthentication.Controllers
 //            var movies = _context.Movies.Include(m => m.Genre).ToList();
 //            return View(movies);
 
-            if (User.IsInRole("CanManageMovies"))
+            if (User.IsInRole(RoleName.CanManageMovies))
             {
                 return View("List");
             }
             return View("ReadOnlyList");
         }
 
+        [Authorize(Roles = RoleName.CanManageMovies)] //this will override the global authorize filter
         public ActionResult MovieForm()
         {
             var genres = _context.Genres.ToList();
@@ -48,7 +49,7 @@ namespace WebWithAuthentication.Controllers
             };
             return View(viewModel);
         }
-
+        [Authorize(Roles = RoleName.CanManageMovies)]
         public ActionResult Edit(int id)
         {
             var movie = _context.Movies.SingleOrDefault(m => m.Id == id);
@@ -95,6 +96,19 @@ namespace WebWithAuthentication.Controllers
             _context.SaveChanges();
 
             return RedirectToAction("Index","Movies");
+        }
+        [Authorize(Roles = RoleName.CanManageMovies)]
+        public ActionResult Delete(int id)
+        {
+            var movie = _context.Movies.SingleOrDefault(m => m.Id == id);
+            if (movie == null)
+            {
+                return HttpNotFound();
+            }
+
+            _context.Movies.Remove(movie);
+            _context.SaveChanges();
+            return RedirectToAction("Index", "Movies");
         }
 
     }
