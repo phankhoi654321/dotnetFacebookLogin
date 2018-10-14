@@ -22,6 +22,12 @@ namespace WebWithAuthentication
                 cfg.CreateMap<Movie, Movie>();
                 cfg.CreateMap<Movie, MovieDto>();
                 cfg.CreateMap<MovieDto, Movie>();
+                cfg.CreateMap<Customer, Customer>();
+                cfg.CreateMap<Customer, CustomerDto>();
+                cfg.CreateMap<CustomerDto, Customer>();
+                cfg.CreateMap<MembershipType, MembershipTypeDto>();
+                cfg.CreateMap<MembershipTypeDto, MembershipType>();
+
             });
 
 

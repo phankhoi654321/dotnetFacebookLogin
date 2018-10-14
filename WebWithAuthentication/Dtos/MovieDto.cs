@@ -33,5 +33,7 @@ namespace WebWithAuthentication.Dtos
         [Display(Name = "Number in Stock")]
         public byte NumberInStock { get; set; }
 
+        public byte NumberAvailable { get; set; }
+
     }
 }
